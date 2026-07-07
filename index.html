@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 完成・公開解禁までは検索避け。面接官に渡す準備が整ったらこの1行を削除する -->
+<meta name="robots" content="noindex, nofollow">
+<title>〔ハンドル〕 — マーケター × AIオーケストレーター</title>
+<style>
+  :root {
+    /* --- light (base) --- */
+    --bg: #F4F6F8;
+    --surface: #FFFFFF;
+    --surface-2: #EDF0F3;
+    --border: #DCE0E6;
+    --border-strong: #C6CCD4;
+    --text: #171B21;
+    --muted: #545E6B;
+    --faint: #838D99;
+    --accent: #A8660F;
+    --accent-bright: #C67A16;
+    --accent-soft: rgba(168,102,15,0.10);
+    --good: #2F7D52;
+    --shadow: 0 1px 2px rgba(20,26,34,.04), 0 8px 24px rgba(20,26,34,.06);
+
+    --mono: "SF Mono", "JetBrains Mono", ui-monospace, "Menlo", "Consolas", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", "Helvetica Neue", system-ui, sans-serif;
+
+    --maxw: 1080px;
+    --step--1: 0.82rem;
+    --step-0: 1.02rem;
+    --step-1: 1.24rem;
+    --step-2: 1.6rem;
+    --step-3: clamp(1.9rem, 1.3rem + 2.4vw, 2.7rem);
+    --step-4: clamp(2.6rem, 1.5rem + 4.6vw, 4.4rem);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0E1116;
+      --surface: #161B22;
+      --surface-2: #1B212B;
+      --border: #29313D;
+      --border-strong: #38424F;
+      --text: #E7EBF1;
+      --muted: #9AA5B4;
+      --faint: #67717F;
+      --accent: #E9A23B;
+      --accent-bright: #F2B356;
+      --accent-soft: rgba(233,162,59,0.13);
+      --good: #57C888;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 32px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #F4F6F8; --surface: #FFFFFF; --surface-2: #EDF0F3; --border: #DCE0E6;
+    --border-strong: #C6CCD4; --text: #171B21; --muted: #545E6B; --faint: #838D99;
+    --accent: #A8660F; --accent-bright: #C67A16; --accent-soft: rgba(168,102,15,0.10);
+    --good: #2F7D52; --shadow: 0 1px 2px rgba(20,26,34,.04), 0 8px 24px rgba(20,26,34,.06);
+  }
+  :root[data-theme="dark"] {
+    --bg: #0E1116; --surface: #161B22; --surface-2: #1B212B; --border: #29313D;
+    --border-strong: #38424F; --text: #E7EBF1; --muted: #9AA5B4; --faint: #67717F;
+    --accent: #E9A23B; --accent-bright: #F2B356; --accent-soft: rgba(233,162,59,0.13);
+    --good: #57C888; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 32px rgba(0,0,0,.35);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: var(--sans); font-size: var(--step-0); line-height: 1.6;
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+  a { color: inherit; }
+
+  .kicker {
+    font-family: var(--mono); font-size: var(--step--1); letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent); font-weight: 600;
+    display: inline-flex; align-items: center; gap: .55em;
+  }
+  .kicker::before { content: ""; width: 22px; height: 1px; background: var(--accent); opacity: .8; }
+
+  h2 { font-size: var(--step-3); line-height: 1.1; letter-spacing: -.02em; margin: .5rem 0 0; text-wrap: balance; font-weight: 700; }
+  h3 { font-size: var(--step-1); margin: 0; letter-spacing: -.01em; font-weight: 650; }
+
+  /* ---------- top bar ---------- */
+  .topbar {
+    position: sticky; top: 0; z-index: 20;
+    backdrop-filter: saturate(1.2) blur(10px);
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    border-bottom: 1px solid var(--border);
+  }
+  .topbar .wrap { display: flex; align-items: center; justify-content: space-between; height: 58px; }
+  .brand { font-family: var(--mono); font-weight: 600; letter-spacing: .02em; font-size: .92rem; }
+  .brand b { color: var(--accent); }
+  .topbar nav { display: flex; gap: 22px; align-items: center; }
+  .topbar nav a { font-size: .86rem; color: var(--muted); text-decoration: none; }
+  .topbar nav a:hover { color: var(--text); }
+  .theme-btn {
+    font-family: var(--mono); font-size: .78rem; color: var(--muted);
+    background: var(--surface-2); border: 1px solid var(--border); border-radius: 7px;
+    padding: 5px 10px; cursor: pointer;
+  }
+  .theme-btn:hover { color: var(--text); border-color: var(--border-strong); }
+  @media (max-width: 680px){ .topbar nav a:not(.theme-btn){ display:none; } }
+
+  /* ---------- hero ---------- */
+  .hero { padding: clamp(56px, 8vw, 104px) 0 clamp(30px, 4vw, 52px); }
+  .hero-grid { display: grid; grid-template-columns: 1.35fr .95fr; gap: 48px; align-items: center; }
+  @media (max-width: 860px){ .hero-grid { grid-template-columns: 1fr; gap: 34px; } }
+  .hero h1 {
+    font-size: var(--step-4); line-height: 1.02; letter-spacing: -.035em;
+    margin: 18px 0 20px; font-weight: 750; text-wrap: balance;
+  }
+  .hero h1 .amber { color: var(--accent); }
+  .hero p.lead { font-size: var(--step-1); color: var(--muted); margin: 0 0 28px; max-width: 32ch; line-height: 1.5; }
+  .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    font-family: var(--sans); font-size: .92rem; font-weight: 600; text-decoration: none;
+    padding: 11px 18px; border-radius: 9px; display: inline-flex; align-items: center; gap: 8px;
+    border: 1px solid transparent; transition: transform .12s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--accent); color: #fff; }
+  @media (prefers-color-scheme: dark){ .btn-primary { color: #17130a; } }
+  :root[data-theme="dark"] .btn-primary { color: #17130a; }
+  :root[data-theme="light"] .btn-primary { color: #fff; }
+  .btn-ghost { border-color: var(--border-strong); color: var(--text); background: var(--surface); }
+
+  .term {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    box-shadow: var(--shadow); overflow: hidden; font-family: var(--mono); font-size: .8rem;
+  }
+  .term-bar { display: flex; align-items: center; gap: 7px; padding: 10px 13px; border-bottom: 1px solid var(--border); background: var(--surface-2); }
+  .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border-strong); }
+  .term-bar span { margin-left: 8px; color: var(--faint); font-size: .72rem; letter-spacing: .04em; }
+  .term-body { padding: 15px 15px 17px; line-height: 1.75; }
+  .term-body .c { color: var(--faint); }
+  .term-body .p { color: var(--accent); }
+  .term-body .g { color: var(--good); }
+  .term-body .t { color: var(--text); }
+  .term-body .m { color: var(--muted); }
+
+  /* ---------- stat row ---------- */
+  .stats {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+    background: var(--border); border: 1px solid var(--border); border-radius: 12px;
+    overflow: hidden; margin-top: 40px;
+  }
+  @media (max-width: 620px){ .stats { grid-template-columns: repeat(2,1fr); } }
+  .stat { background: var(--surface); padding: 20px 18px; }
+  .stat .n { font-size: 2rem; font-weight: 720; letter-spacing: -.03em; font-variant-numeric: tabular-nums; line-height: 1; }
+  .stat .n .u { font-size: 1rem; color: var(--accent); font-weight: 600; margin-left: 2px; }
+  .stat .l { font-family: var(--mono); font-size: .72rem; color: var(--muted); letter-spacing: .04em; margin-top: 8px; }
+
+  /* ---------- section frame ---------- */
+  section { padding: clamp(48px, 6vw, 84px) 0; border-top: 1px solid var(--border); }
+  .sec-head { max-width: 62ch; margin-bottom: 40px; }
+  .sec-head p { color: var(--muted); margin: 14px 0 0; }
+
+  /* ---------- why / philosophy ---------- */
+  .why-lead {
+    font-size: var(--step-2); line-height: 1.5; letter-spacing: -.015em;
+    max-width: 30ch; margin: 6px 0 0; font-weight: 600; text-wrap: balance;
+  }
+  .why-lead .amber { color: var(--accent); }
+  .why-steps { margin-top: 44px; border-top: 1px solid var(--border); }
+  .why-step {
+    display: grid; grid-template-columns: 74px 220px 1fr; gap: 28px; align-items: baseline;
+    padding: 24px 4px; border-bottom: 1px solid var(--border);
+  }
+  @media (max-width: 720px){ .why-step { grid-template-columns: 44px 1fr; gap: 8px 18px; } .why-step p { grid-column: 2; } }
+  .why-step .idx { font-family: var(--mono); font-size: 1.35rem; font-weight: 700; color: var(--accent); letter-spacing: -.02em; }
+  .why-step h3 { font-size: 1.12rem; }
+  .why-step p { margin: 0; color: var(--muted); font-size: .94rem; }
+
+  /* ---------- capability grid ---------- */
+  .caps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 820px){ .caps { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 520px){ .caps { grid-template-columns: 1fr; } }
+  .cap {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 11px;
+    padding: 20px 20px 22px; transition: border-color .15s ease, transform .15s ease;
+  }
+  .cap:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .cap .num { font-family: var(--mono); font-size: .72rem; color: var(--faint); letter-spacing: .1em; }
+  .cap h3 { margin: 10px 0 8px; font-size: 1.12rem; }
+  .cap p { margin: 0 0 14px; color: var(--muted); font-size: .9rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    font-family: var(--mono); font-size: .7rem; color: var(--muted);
+    background: var(--surface-2); border: 1px solid var(--border); border-radius: 6px; padding: 3px 8px;
+  }
+
+  /* ---------- case studies ---------- */
+  .cases { display: flex; flex-direction: column; gap: 20px; }
+  .case {
+    display: grid; grid-template-columns: 216px 1fr; gap: 28px;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 13px;
+    padding: 26px 28px; box-shadow: var(--shadow);
+  }
+  @media (max-width: 760px){ .case { grid-template-columns: 1fr; gap: 16px; } }
+  .case-tag { font-family: var(--mono); font-size: .72rem; color: var(--accent); letter-spacing: .1em; }
+  .case-aside h3 { margin: 12px 0 12px; font-size: 1.22rem; line-height: 1.2; }
+  .metric {
+    font-family: var(--mono); font-size: .74rem; color: var(--muted);
+    display: inline-flex; align-items: center; gap: 7px;
+    background: var(--surface-2); border: 1px solid var(--border); border-radius: 7px; padding: 5px 9px;
+  }
+  .metric b { color: var(--good); font-size: .95rem; }
+  .case-body { display: grid; gap: 14px; }
+  .row { display: grid; grid-template-columns: 92px 1fr; gap: 16px; align-items: start; }
+  @media (max-width: 460px){ .row { grid-template-columns: 1fr; gap: 3px; } }
+  .row .lab {
+    font-family: var(--mono); font-size: .72rem; letter-spacing: .06em; color: var(--faint);
+    text-transform: uppercase; padding-top: 3px;
+  }
+  .row.result .lab { color: var(--good); }
+  .row .val { color: var(--text); font-size: .94rem; }
+  .row .val .em { color: var(--accent); font-weight: 600; }
+
+  /* ---------- products ---------- */
+  .prods { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  @media (max-width: 640px){ .prods { grid-template-columns: 1fr; } }
+  .prod {
+    display: flex; gap: 15px; align-items: flex-start;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 11px; padding: 18px 20px;
+  }
+  .prod .ic {
+    font-family: var(--mono); font-weight: 700; font-size: .78rem; color: var(--accent);
+    background: var(--accent-soft); border-radius: 8px; width: 44px; height: 44px; flex: 0 0 44px;
+    display: grid; place-items: center; letter-spacing: .01em;
+  }
+  .prod h4 { margin: 0 0 3px; font-size: 1rem; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .prod h4 .live { font-family: var(--mono); font-size: .6rem; color: var(--good); border: 1px solid color-mix(in srgb, var(--good) 45%, transparent); border-radius: 20px; padding: 1px 7px; letter-spacing: .08em; }
+  .prod p { margin: 0; color: var(--muted); font-size: .86rem; }
+
+  /* ---------- now / next ---------- */
+  .nn { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 720px){ .nn { grid-template-columns: 1fr; } }
+  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 13px; padding: 26px 26px 28px; }
+  .panel.next { border-color: var(--border-strong); background: linear-gradient(180deg, var(--accent-soft), transparent 60%), var(--surface); }
+  .panel .kicker { margin-bottom: 16px; }
+  .tl { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+  .tl li { display: grid; grid-template-columns: 18px 1fr; gap: 12px; align-items: start; }
+  .tl .mk { width: 9px; height: 9px; border-radius: 50%; margin-top: 7px; background: var(--good); box-shadow: 0 0 0 4px color-mix(in srgb, var(--good) 22%, transparent); }
+  .panel.next .tl .mk { background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+  .tl strong { font-weight: 620; }
+  .tl span { color: var(--muted); font-size: .9rem; }
+
+  /* ---------- background ---------- */
+  .bg-list { display: grid; gap: 0; border-top: 1px solid var(--border); }
+  .bg-item {
+    display: grid; grid-template-columns: 160px 1fr; gap: 26px; align-items: baseline;
+    padding: 22px 4px; border-bottom: 1px solid var(--border);
+  }
+  @media (max-width: 640px){ .bg-item { grid-template-columns: 1fr; gap: 6px; } }
+  .bg-item .yr { font-family: var(--mono); font-size: .82rem; color: var(--accent); letter-spacing: .04em; }
+  .bg-item h3 { font-size: 1.06rem; margin: 0 0 5px; }
+  .bg-item p { margin: 0; color: var(--muted); font-size: .92rem; }
+  .bg-note { margin-top: 20px; font-family: var(--mono); font-size: .74rem; color: var(--faint); letter-spacing: .02em; }
+
+  /* ---------- stack ---------- */
+  .stack-groups { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+  @media (max-width: 720px){ .stack-groups { grid-template-columns: 1fr; } }
+  .stack-groups h4 { font-family: var(--mono); font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); margin: 0 0 12px; }
+  .stack-groups .chips .chip { font-size: .76rem; padding: 5px 10px; color: var(--text); }
+
+  /* ---------- footer ---------- */
+  footer { border-top: 1px solid var(--border); padding: clamp(50px,7vw,90px) 0 60px; }
+  .foot { display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; flex-wrap: wrap; }
+  .foot h2 { max-width: 18ch; }
+  .contact-note { color: var(--muted); margin: 16px 0 0; max-width: 34ch; font-size: .96rem; }
+  .contact-note strong { color: var(--text); }
+  .foot .links { display: grid; gap: 10px; font-family: var(--mono); font-size: .86rem; justify-items: start; }
+  .foot .links a { color: var(--muted); text-decoration: none; }
+  .foot .links a:hover { color: var(--accent); }
+  .contact-cta {
+    font-family: var(--sans) !important; font-weight: 600; color: #fff !important;
+    background: var(--accent); border-radius: 9px; padding: 11px 18px; font-size: .92rem;
+  }
+  @media (prefers-color-scheme: dark){ .contact-cta { color: #17130a !important; } }
+  :root[data-theme="dark"] .contact-cta { color: #17130a !important; }
+  :root[data-theme="light"] .contact-cta { color: #fff !important; }
+  .contact-cta:hover { color: #fff !important; opacity: .92; }
+  :root[data-theme="dark"] .contact-cta:hover { color: #17130a !important; }
+  .contact-sub { color: var(--faint); font-size: .74rem; letter-spacing: .02em; }
+  .fineprint { margin-top: 44px; font-family: var(--mono); font-size: .72rem; color: var(--faint); letter-spacing: .03em; }
+
+  .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce){ .reveal { opacity: 1; transform: none; transition: none; } .btn:hover,.cap:hover{ transform:none; } }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="brand"><b>〔ハンドル〕</b><span style="color:var(--faint);font-weight:400"> / marketer × AI</span></div>
+    <nav>
+      <a href="#why">なぜ</a>
+      <a href="#caps">できること</a>
+      <a href="#cases">ケース</a>
+      <a href="#products">作ったもの</a>
+      <a href="#nownext">Now / Next</a>
+      <a href="#background">経歴</a>
+      <button class="theme-btn" id="themeBtn" type="button">◐ theme</button>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="kicker">Marketer → AI Orchestrator</span>
+        <h1>AIを<span class="amber">使う</span>から、<br>組織として<span class="amber">動かす</span>へ。</h1>
+        <p class="lead">マーケティングの現場から、AIの最前線へ。Claude Code で調査・制作・開発・運用を束ね、1人で「AIで動くチーム」を設計・運用しています。</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#cases">ケースを見る</a>
+          <a class="btn btn-ghost" href="#contact">連絡する</a>
+        </div>
+      </div>
+      <div class="term reveal in" aria-hidden="true">
+        <div class="term-bar"><i class="dot"></i><i class="dot"></i><i class="dot"></i><span>~/studio — claude code</span></div>
+        <div class="term-body">
+          <div><span class="p">▸</span> <span class="t">delegate --parallel</span></div>
+          <div><span class="m">  spawning agents…</span></div>
+          <div><span class="g">  ✓</span> <span class="t">market-researcher</span> <span class="c">— 競合調査</span></div>
+          <div><span class="g">  ✓</span> <span class="t">content-director</span> <span class="c">— 制作差配</span></div>
+          <div><span class="g">  ✓</span> <span class="t">system-engineer</span> <span class="c">— 実装</span></div>
+          <div><span class="g">  ✓</span> <span class="t">secretary</span> <span class="c">— 進行管理</span></div>
+          <div><span class="c">  15 agents defined · 1 human in the loop</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats reveal">
+      <div class="stat"><div class="n">7<span class="u">本</span></div><div class="l">自作アプリ / 実運用</div></div>
+      <div class="stat"><div class="n">6<span class="u">本</span></div><div class="l">常駐デーモン (launchd)</div></div>
+      <div class="stat"><div class="n">15<span class="u"></span></div><div class="l">AIエージェント組織</div></div>
+      <div class="stat"><div class="n">120<span class="u">→9秒</span></div><div class="l">計測で根治した処理</div></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- ===== why ===== -->
+  <section id="why">
+    <div class="wrap">
+      <div class="sec-head reveal" style="max-width:none">
+        <span class="kicker">Why — なぜ、これをやっているか</span>
+        <p class="why-lead">AIは、分野の壁を溶かしている。「マーケだけ」「開発だけ」では通用しなくなる時代に、<span class="amber">全分野をAIで横断して動かせる人間</span>になりたい。そのために選んだのは、読むことでも眺めることでもなく——<span class="amber">自分で作り、運用し、体験すること</span>。</p>
+      </div>
+      <div class="why-steps reveal">
+        <div class="why-step">
+          <div class="idx">01</div>
+          <h3>どこへ行きたいか</h3>
+          <p>AI時代の先端を、「知っている」ではなく<strong>「実務で使いこなせる」</strong>レベルで理解している人間になる。業務効率化からシステム開発まで、6分野すべてを高い水準で。</p>
+        </div>
+        <div class="why-step">
+          <div class="idx">02</div>
+          <h3>だから、体験する</h3>
+          <p>本や記事で概念を追うだけでは、実務には届かない。だから<strong>自分で作り、壊れたら直し、運用まで回して</strong>、体で覚える。この体験こそが、他人に説明できる本物の理解になる。</p>
+        </div>
+        <div class="why-step">
+          <div class="idx">03</div>
+          <h3>だから、これを作っている</h3>
+          <p>7本のシステムも、15体のエージェントも、自作の標準も——<strong>ゴールではなく、その理解に到達するための手段</strong>。以下は「作品」ではなく、目的から逆算した実験と鍛錬の記録です。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== capabilities ===== -->
+  <section id="caps">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker">Capabilities</span>
+        <h2>6分野を、実務レベルで。</h2>
+        <p>「AIが得意」ではなく、業務効率化からシステム開発まで、成果につながる形で使いこなす。各分野に、実際に動いている仕組みと一次資料（git・テスト・稼働ログ）の裏付けがあります。</p>
+      </div>
+      <div class="caps">
+        <div class="cap reveal">
+          <div class="num">01 / EFFICIENCY</div>
+          <h3>業務効率化</h3>
+          <p>手作業を常駐プロセスに落とし、並行作業を「計器付き」で安全に回す基盤づくり。</p>
+          <div class="chips"><span class="chip">launchd 常駐 ×6</span><span class="chip">利用枠 監視デーモン</span><span class="chip">git worktree 並列</span><span class="chip">Tailscale リモート開発</span></div>
+        </div>
+        <div class="cap reveal">
+          <div class="num">02 / DESIGN</div>
+          <h3>デザイン / フロント</h3>
+          <p>共通デザインシステムと機能図書館で、UIを速く・崩さず作る。PWAまで内製。</p>
+          <div class="chips"><span class="chip">React 19 + Vite</span><span class="chip">Tailwind v4</span><span class="chip">Next.js</span><span class="chip">PWA / Web Push</span></div>
+        </div>
+        <div class="cap reveal">
+          <div class="num">03 / RESEARCH</div>
+          <h3>調査</h3>
+          <p>多視点で問いを立て、出典で裏取りしてから結論を出す。動画・音声も自動で解析。</p>
+          <div class="chips"><span class="chip">Exa 検索</span><span class="chip">mlx-whisper 文字起こし</span><span class="chip">並列リサーチ</span><span class="chip">裏取り必須ルール</span></div>
+        </div>
+        <div class="cap reveal">
+          <div class="num">04 / MARKETING</div>
+          <h3>マーケ / コンテンツ</h3>
+          <p>発信を属人から仕組みへ。予約投稿の自動化と、跳ねた型の再利用まで設計。</p>
+          <div class="chips"><span class="chip">content-studio WF</span><span class="chip">SNS予約投稿 自動化</span><span class="chip">展開フォーマット図書館</span><span class="chip">ペルソナ起点</span></div>
+        </div>
+        <div class="cap reveal">
+          <div class="num">05 / ORCHESTRATION</div>
+          <h3>組織化</h3>
+          <p>役割を持つAIエージェント15体を、部長‑担当の階層と非同期プロトコルで束ねる。</p>
+          <div class="chips"><span class="chip">15エージェント組織</span><span class="chip">ORG.md 設計</span><span class="chip">自作 Skill (council/evolve)</span><span class="chip">MCP 連携</span></div>
+        </div>
+        <div class="cap reveal">
+          <div class="num">06 / ENGINEERING</div>
+          <h3>システム開発</h3>
+          <p>共通基盤から独立SaaS化。バグは再現テストを先に書いて直す（red→green）規律。</p>
+          <div class="chips"><span class="chip">Flask / React / Streamlit</span><span class="chip">Playwright + pytest</span><span class="chip">自作 MCP サーバ</span><span class="chip">品質ゲート自動化</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== case studies ===== -->
+  <section id="cases">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker">Case Studies</span>
+        <h2>何を、どう使って、どう変えたか。</h2>
+        <p>ツールの一覧ではなく、課題に対してAIをどう設計したか。マーケの発想（ターゲット→逆算）を、システムの設計に持ち込んでいます。各ケースはgitログ・テスト・稼働ログで裏付け済み。</p>
+      </div>
+      <div class="cases">
+
+        <article class="case reveal">
+          <div class="case-aside">
+            <div class="case-tag">CASE — ORCHESTRATION</div>
+            <h3>1人で、チームを動かす</h3>
+            <span class="metric"><b>15</b> エージェント運用</span>
+          </div>
+          <div class="case-body">
+            <div class="row"><div class="lab">課題</div><div class="val">企画・調査・制作・開発を1人で直列に回すと、すぐ詰まる。手が1組しかない。</div></div>
+            <div class="row"><div class="lab">使い方</div><div class="val">役割を持つ<span class="em">AIエージェント15体</span>を、秘書→3部門（開発・コンテンツ・事業）＋横断アーキビストの階層で設計（ORG.md）。ファイルベースの非同期連絡プロトコルで束ね、「目的逆算」を全社ルールに標準化。運用で出た失敗知見（承認デッドロック等）も文書化。</div></div>
+            <div class="row result"><div class="lab">成果</div><div class="val">独立作業を<span class="em">並列ファンアウト</span>で同時進行。発想が「AIをどう使うか」から「AIを組織としてどう設計するか」へ移行。</div></div>
+          </div>
+        </article>
+
+        <article class="case reveal">
+          <div class="case-aside">
+            <div class="case-tag">CASE — ENGINEERING</div>
+            <h3>推測せず、計測で根治する</h3>
+            <span class="metric"><b>120秒 → 9秒</b></span>
+          </div>
+          <div class="case-body">
+            <div class="row"><div class="lab">課題</div><div class="val">内製エディタの予約投稿フローが120秒たっても終わらない。「たぶんモデルのせい」で片付けず原因を切り分け。</div></div>
+            <div class="row"><div class="lab">使い方</div><div class="val">真因は<span class="em">接続中の全MCPツール定義を毎回ロードしていたこと</span>と特定。使うツールだけにスコープ限定（<span class="em">--strict-mcp-config</span>）。モデル選択など他要因は計測で除外。</div></div>
+            <div class="row result"><div class="lab">成果</div><div class="val">該当処理が<span class="em">120秒→9秒</span>、フロー全体28〜44秒で安定。推測でなく計測で根治する規律。</div></div>
+          </div>
+        </article>
+
+        <article class="case reveal">
+          <div class="case-aside">
+            <div class="case-tag">CASE — RELIABILITY</div>
+            <h3>暴走を、構造で封じ込める</h3>
+            <span class="metric"><b>red → green</b> で恒久化</span>
+          </div>
+          <div class="case-body">
+            <div class="row"><div class="lab">課題</div><div class="val">閉じ忘れた1セッションがAPIを叩き続け、並行処理が利用枠を無自覚に消費するインシデントが発生。</div></div>
+            <div class="row"><div class="lab">使い方</div><div class="val">エディタ内8箇所のAI呼び出しを<span class="em">共有の同時実行ゲート</span>に集約し、クライアント切断時も必ず解放。再発検知用に<span class="em">監視デーモンをlaunchd常駐で新設</span>。デッドロック検証込みの回帰テストで固定。</div></div>
+            <div class="row result"><div class="lab">成果</div><div class="val">「起きたら直す」でなく<span class="em">「二度と起きない構造」</span>に。障害対応をテストとして資産化。</div></div>
+          </div>
+        </article>
+
+        <article class="case reveal">
+          <div class="case-aside">
+            <div class="case-tag">CASE — STANDARDS</div>
+            <h3>標準を、自分で作る</h3>
+            <span class="metric"><b>入口 + 出口</b> の品質ゲート</span>
+          </div>
+          <div class="case-body">
+            <div class="row"><div class="lab">課題</div><div class="val">1人で複数の開発・制作を回すと、進め方が属人化して品質が揺れる。</div></div>
+            <div class="row"><div class="lab">使い方</div><div class="val">「AI開発標準マニュアル」を<span class="em">自ら策定</span>（DEV_STANDARDS）。入口＝要件1枚の承認、出口＝再現テスト先付け（red→fix→green）。Flask / Next 両方のテスト基盤テンプレを用意し、<span class="em">git push前フックで自動強制</span>。</div></div>
+            <div class="row result"><div class="lab">成果</div><div class="val">開発・コンテンツ・組織それぞれに標準を整備。仕組みで品質を担保する運用へ。</div></div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== products ===== -->
+  <section id="products">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker">Built</span>
+        <h2>作ったもの。</h2>
+        <p>すべて Mac mini 上で自作・運用。<span style="color:var(--good);font-family:var(--mono);font-size:.85em">LIVE</span> はlaunchdで常駐稼働中のもの。（デモ・詳細は面談時に）</p>
+      </div>
+      <div class="prods">
+        <div class="prod reveal"><div class="ic">NOTE</div><div><h4>note-editor <span class="live">LIVE</span></h4><p>チャットUIの記事制作エディタ。執筆ルール＋Web調査＋検品ゲートを毎回通す。Flask + React 19 / Vite。E2E約44テスト。</p></div></div>
+        <div class="prod reveal"><div class="ic">TRSC</div><div><h4>poc-transcribe <span class="live">LIVE</span></h4><p>動画URL→タイムスタンプ付き文字起こし。ローカルGPU（mlx-whisper）でAPIコストゼロ。毎朝の自動クリッピングも。</p></div></div>
+        <div class="prod reveal"><div class="ic">BORD</div><div><h4>devboard <span class="live">LIVE</span></h4><p>複数プロジェクトの状態を1画面集約。3秒ポーリング＋停滞検知＋自前Web Push通知（PWA）。16案件を集約運用。</p></div></div>
+        <div class="prod reveal"><div class="ic">SNS</div><div><h4>sns-publisher</h4><p>note / X / LinkedIn への予約投稿を自動化。自作のMCPサーバとしても操作でき、二重投稿もアトミックに排除。</p></div></div>
+        <div class="prod reveal"><div class="ic">SIM</div><div><h4>business-simulator ほか</h4><p>集客→認知→収支のシミュレーター、SFA/CRM、キャッシュフローを Streamlit で内製。</p></div></div>
+        <div class="prod reveal"><div class="ic">SKL</div><div><h4>自作 Claude Skill</h4><p>council（6役割＋議長の評議会）・evolve（全履歴からフレームワークを抽出する能動学習ループ）を自作・運用。</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== now / next ===== -->
+  <section id="nownext">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker">Trajectory</span>
+        <h2>今やっていること、これからやること。</h2>
+        <p>AIの進化は速い。だから「何ができたか」だけでなく、今どこにいて、次にどこへ向かうかを示します。</p>
+      </div>
+      <div class="nn">
+        <div class="panel now reveal">
+          <span class="kicker">Now — 進行中</span>
+          <ul class="tl">
+            <li><span class="mk"></span><div><strong>複数事業・複数開発の並列運用</strong><br><span>15エージェント体制で、開発・制作・調査を同時進行させている。</span></div></li>
+            <li><span class="mk"></span><div><strong>運用の計器化と暴走防止</strong><br><span>devboard・利用枠監視・状態可視化を自作し、並行AI開発を安全に回す。</span></div></li>
+            <li><span class="mk"></span><div><strong>リモート開発の常駐化</strong><br><span>Mac mini を拠点に、Tailscale + tmux で外出先からも開発・回収。</span></div></li>
+          </ul>
+        </div>
+        <div class="panel next reveal">
+          <span class="kicker">Next — これから ✎自分の言葉に調整可</span>
+          <ul class="tl">
+            <li><span class="mk"></span><div><strong>AIエージェント運用を、組織に実装する</strong><br><span>1人で確立した15体制の型を、チーム・事業スケールへ広げる。</span></div></li>
+            <li><span class="mk"></span><div><strong>「計測して根治する」開発文化を移植する</strong><br><span>属人でなく、標準と再現テストで品質を担保する開発を根付かせる。</span></div></li>
+            <li><span class="mk"></span><div><strong>マーケ起点で、事業の生産性を設計する</strong><br><span>出自のマーケ視点で、AI活用を売上・業務に効く形へ落とし込む。</span></div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== background ===== -->
+  <section id="background">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker">Background — 経歴</span>
+        <h2>マーケの現場から、AIの実装へ。</h2>
+        <p>身元が特定される固有名詞（社名・所属）は伏せ、職種・領域・規模感でお伝えします。詳細な経歴書はご連絡後に個別にお渡しします。</p>
+      </div>
+      <div class="bg-list reveal">
+        <div class="bg-item">
+          <div class="yr">〔20XX–20XX〕</div>
+          <div>
+            <h3>マーケティング 〔デジタル / コンテンツ / 戦略 など〕</h3>
+            <p>〔業界：例 BtoB SaaS / 消費財 / 人材 など〕で〔役割〕を担当。〔実績を"社名なし・数字"で：例「リード獲得を前年比◯%改善」「◯万規模の運用を主導」〕。</p>
+          </div>
+        </div>
+        <div class="bg-item">
+          <div class="yr">〔20XX〕— 転機</div>
+          <div>
+            <h3>AIの進化を受け、独学で開発へ</h3>
+            <p>生成AIの急速な進化に危機感と可能性を感じ、Claude Code を独学。まず自分の業務を自動化・内製することから始めた。〔※あなた個人のきっかけを1〜2文で〕</p>
+          </div>
+        </div>
+        <div class="bg-item">
+          <div class="yr">現在</div>
+          <div>
+            <h3>1人でAIエージェント組織を設計・運用</h3>
+            <p>調査・制作・開発・運用を横断し、15体のAIエージェント体制でシステムを内製・運用（本ポートフォリオの内容）。</p>
+          </div>
+        </div>
+      </div>
+      <p class="bg-note reveal">※ 社名・固有名詞・一部の具体数値は非公開。選考の段階に応じて個別に開示します。</p>
+    </div>
+  </section>
+
+  <!-- ===== stack ===== -->
+  <section id="stack">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker">Stack</span>
+        <h2>使いこなしている道具。</h2>
+        <p>名目でなく、実際に手を動かした証拠があるものだけ。</p>
+      </div>
+      <div class="stack-groups reveal">
+        <div>
+          <h4>AI / Orchestration</h4>
+          <div class="chips"><span class="chip">Claude Code</span><span class="chip">Anthropic API</span><span class="chip">xAI Grok</span><span class="chip">サブエージェント</span><span class="chip">Skills</span><span class="chip">自作 MCP</span><span class="chip">mlx-whisper</span></div>
+        </div>
+        <div>
+          <h4>Build</h4>
+          <div class="chips"><span class="chip">Python / Flask</span><span class="chip">TypeScript</span><span class="chip">React 19</span><span class="chip">Vite</span><span class="chip">Tailwind v4</span><span class="chip">Next.js</span><span class="chip">Streamlit</span><span class="chip">Playwright / pytest</span></div>
+        </div>
+        <div>
+          <h4>Ops / Knowledge</h4>
+          <div class="chips"><span class="chip">macOS launchd</span><span class="chip">Tailscale</span><span class="chip">tmux</span><span class="chip">Git / worktree</span><span class="chip">PWA / VAPID</span><span class="chip">Obsidian</span><span class="chip">Notion</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot">
+      <div class="reveal">
+        <span class="kicker">Contact</span>
+        <h2>AIで、チームの生産性を変えます。</h2>
+        <p class="contact-note">実名・詳細な経歴・職務経歴書は、ご連絡いただいた方に<strong>個別にお送りします</strong>。まずはお気軽にどうぞ。</p>
+      </div>
+      <div class="links reveal">
+        <a class="contact-cta" href="〔フォームURL〕">✉&nbsp; お問い合わせフォーム</a>
+        <span class="contact-sub">※ 実名・メール・所属は非公開。ご連絡はこのフォームから（返信は〔ハンドル〕より行います）。</span>
+      </div>
+    </div>
+    <div class="fineprint">〔ハンドル〕 — Portfolio · designed &amp; built with Claude Code · 〔更新日〕</div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var btn = document.getElementById('themeBtn');
+    btn.addEventListener('click', function () {
+      var cur = root.getAttribute('data-theme');
+      if (!cur) { cur = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+      root.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
+    });
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) { els.forEach(function(e){ e.classList.add('in'); }); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.12 });
+    els.forEach(function (e) { io.observe(e); });
+  })();
+</script>
+</body>
+</html>
