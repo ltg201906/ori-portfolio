@@ -158,22 +158,6 @@
   .sec-head { max-width: 62ch; margin-bottom: 40px; }
   .sec-head p { color: var(--muted); margin: 14px 0 0; }
 
-  /* ---------- why / philosophy ---------- */
-  .why-lead {
-    font-size: var(--step-2); line-height: 1.5; letter-spacing: -.015em;
-    max-width: 30ch; margin: 6px 0 0; font-weight: 600; text-wrap: balance;
-  }
-  .why-lead .amber { color: var(--accent); }
-  .why-steps { margin-top: 44px; border-top: 1px solid var(--border); }
-  .why-step {
-    display: grid; grid-template-columns: 74px 220px 1fr; gap: 28px; align-items: baseline;
-    padding: 24px 4px; border-bottom: 1px solid var(--border);
-  }
-  @media (max-width: 720px){ .why-step { grid-template-columns: 44px 1fr; gap: 8px 18px; } .why-step p { grid-column: 2; } }
-  .why-step .idx { font-family: var(--mono); font-size: 1.35rem; font-weight: 700; color: var(--accent); letter-spacing: -.02em; }
-  .why-step h3 { font-size: 1.12rem; }
-  .why-step p { margin: 0; color: var(--muted); font-size: .94rem; }
-
   /* ---------- capability grid ---------- */
   .caps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
   @media (max-width: 820px){ .caps { grid-template-columns: repeat(2,1fr); } }
@@ -201,7 +185,8 @@
   }
   @media (max-width: 760px){ .case { grid-template-columns: 1fr; gap: 16px; } }
   .case-tag { font-family: var(--mono); font-size: .72rem; color: var(--accent); letter-spacing: .1em; }
-  .case-aside h3 { margin: 12px 0 12px; font-size: 1.22rem; line-height: 1.2; }
+  .case-aside h3 { margin: 12px 0 4px; font-size: 1.28rem; line-height: 1.22; }
+  .case-question { margin: 0 0 14px; color: var(--muted); font-size: .92rem; line-height: 1.5; }
   .metric {
     font-family: var(--mono); font-size: .74rem; color: var(--muted);
     display: inline-flex; align-items: center; gap: 7px;
@@ -217,7 +202,7 @@
   }
   .row.result .lab { color: var(--good); }
   .row .val { color: var(--text); font-size: .94rem; }
-  .row .val .em { color: var(--accent); font-weight: 600; }
+  .em { color: var(--accent); font-weight: 600; }
 
   /* ---------- products ---------- */
   .prods { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
@@ -299,9 +284,8 @@
   <div class="wrap">
     <div class="brand"><b>織原松治</b><span style="color:var(--faint);font-weight:400"> / marketer × AI</span></div>
     <nav>
-      <a href="#why">なぜ</a>
-      <a href="#caps">できること</a>
-      <a href="#cases">ケース</a>
+      <a href="#caps">取り組み</a>
+      <a href="#cases">検証</a>
       <a href="#products">作ったもの</a>
       <a href="#nownext">Now / Next</a>
       <a href="#background">経歴</a>
@@ -318,7 +302,7 @@
         <h1>AIを<span class="amber">使う側</span>から、<br>組織として<span class="amber">動かす側</span>へ。</h1>
         <p class="lead">AI世代、最前線の働き方へ移行中。ClaudeCodeで業務のすべてをアップデート中。現在は小さなシステム開発を中心に行っています。</p>
         <div class="cta-row">
-          <a class="btn btn-primary" href="#cases">ケースを見る</a>
+          <a class="btn btn-primary" href="#cases">検証を見る</a>
           <a class="btn btn-ghost" href="#contact">連絡する</a>
         </div>
       </div>
@@ -351,44 +335,44 @@
     <div class="wrap">
       <div class="sec-head reveal">
         <span class="kicker">Capabilities</span>
-        <h2>主要６分野のカバーに向けて。</h2>
+        <h2>主要６分野のカバーに向けて</h2>
         <p>ClaudeCodeで飛躍的にベースアップすると考えているのはおおよそ６分野。<br>実現できると、１名あたりの作業スピード、精度、生産量などの総合生産性は飛躍的に向上し、それは事業の利益率、利益額にインパクトを与える。間接的には売上額にも貢献することになる。</p>
       </div>
       <div class="caps">
         <div class="cap reveal">
           <div class="num">01 / EFFICIENCY</div>
           <h3>業務効率化</h3>
-          <p>手作業を常駐プロセスに落とし、並行作業を「計器付き」で安全に回す基盤づくり。</p>
+          <p>既存の定型業務をAIに置き換え、作業量・スピード・精度を最大化。人は人間固有の定性業務に集中する。</p>
           <div class="chips"><span class="chip">launchd 常駐 ×6</span><span class="chip">利用枠 監視デーモン</span><span class="chip">git worktree 並列</span><span class="chip">Tailscale リモート開発</span></div>
         </div>
         <div class="cap reveal">
           <div class="num">02 / DESIGN</div>
           <h3>デザイン / フロント</h3>
-          <p>共通デザインシステムと機能図書館で、UIを速く・崩さず作る。PWAまで内製。</p>
+          <p>多様なパターンを質高く瞬時に制作。人が思いつきにくいデザイン・ビジュアルまで開発する。</p>
           <div class="chips"><span class="chip">React 19 + Vite</span><span class="chip">Tailwind v4</span><span class="chip">Next.js</span><span class="chip">PWA / Web Push</span></div>
         </div>
         <div class="cap reveal">
           <div class="num">03 / RESEARCH</div>
           <h3>調査 / 資料作成</h3>
-          <p>多視点で問いを立て、出典で裏取りしてから結論を出す。動画・音声も自動で解析。</p>
+          <p>調査範囲をMECEに拡大しつつ精度を担保。資料化・言語化・フレームワーク化まで人を超える質とスピードで仕上げる。</p>
           <div class="chips"><span class="chip">Exa 検索</span><span class="chip">mlx-whisper 文字起こし</span><span class="chip">並列リサーチ</span><span class="chip">裏取り必須ルール</span></div>
         </div>
         <div class="cap reveal">
           <div class="num">04 / MARKETING</div>
           <h3>マーケ / コンテンツ</h3>
-          <p>発信を属人から仕組みへ。予約投稿の自動化と、跳ねた型の再利用まで設計。</p>
+          <p>マーケ業務を自動化し、多様なコンテンツを高速生産。データドリブンでPDCAと次施策まで自動で回す。</p>
           <div class="chips"><span class="chip">content-studio WF</span><span class="chip">SNS予約投稿 自動化</span><span class="chip">展開フォーマット図書館</span><span class="chip">ペルソナ起点</span></div>
         </div>
         <div class="cap reveal">
           <div class="num">05 / ORCHESTRATION</div>
           <h3>組織化</h3>
-          <p>役割を持つAIエージェント15体を、部長‑担当の階層と非同期プロトコルで束ねる。</p>
+          <p>1人とサブエージェントで生産量・速度・多様性を最大化。ノウハウをRAG分析し、既存業務へのPoCで組織力を継続的に更新する。</p>
           <div class="chips"><span class="chip">15エージェント組織</span><span class="chip">ORG.md 設計</span><span class="chip">自作 Skill (council/evolve)</span><span class="chip">MCP 連携</span></div>
         </div>
         <div class="cap reveal">
           <div class="num">06 / ENGINEERING</div>
           <h3>システム開発</h3>
-          <p>共通基盤から独立SaaS化。バグは再現テストを先に書いて直す（red→green）規律。</p>
+          <p>意図通りのシステムを高速・高精度に開発。運用コストと外注費を削り、01〜05を支える基盤を作る。</p>
           <div class="chips"><span class="chip">Flask / React / Streamlit</span><span class="chip">Playwright + pytest</span><span class="chip">自作 MCP サーバ</span><span class="chip">品質ゲート自動化</span></div>
         </div>
       </div>
@@ -400,60 +384,92 @@
     <div class="wrap">
       <div class="sec-head reveal">
         <span class="kicker">Case Studies</span>
-        <h2>何を、どう使って、どう変えたか。</h2>
-        <p>ツールの一覧ではなく、課題に対してAIをどう設計したか。マーケの発想（ターゲット→逆算）を、システムの設計に持ち込んでいます。各ケースはgitログ・テスト・稼働ログで裏付け済み。</p>
+        <h2>何を、どう検証しているか。</h2>
+        <p>検証していることは大きく二つ。<span class="em">非エンジニアでも学習コストを低く抑え、自分たちの業務を代替する仕組みを作れるか。</span>そして、<span class="em">パフォーマンスの最大化と最高スピードと最高品質を、どこまで実現できるか。</span>その仮説を、日々の運用の中で試している記録です。各ケースはgitログ・テスト・稼働ログで裏付け済み。</p>
       </div>
       <div class="cases">
 
         <article class="case reveal">
           <div class="case-aside">
             <div class="case-tag">CASE — ORCHESTRATION</div>
-            <h3>1人で、チームを動かす</h3>
+            <h3>キャパシティ最大化の可能性</h3>
+            <p class="case-question">1人で、本当に100体のAIエージェントを動かせるのか？</p>
             <span class="metric"><b>15</b> エージェント運用</span>
           </div>
           <div class="case-body">
             <div class="row"><div class="lab">課題</div><div class="val">企画・調査・制作・開発を1人で直列に回すと、すぐ詰まる。手が1組しかない。</div></div>
-            <div class="row"><div class="lab">使い方</div><div class="val">役割を持つ<span class="em">AIエージェント15体</span>を、秘書→3部門（開発・コンテンツ・事業）＋横断アーキビストの階層で設計（ORG.md）。ファイルベースの非同期連絡プロトコルで束ね、「目的逆算」を全社ルールに標準化。運用で出た失敗知見（承認デッドロック等）も文書化。</div></div>
+            <div class="row"><div class="lab">使い方</div><div class="val">役割を持つ<span class="em">AIエージェント15体</span>を階層構造と連絡プロトコルで設計。判断の型を全体ルールとして標準化し、運用で出た失敗知見も型として蓄積している。</div></div>
             <div class="row result"><div class="lab">成果</div><div class="val">独立作業を<span class="em">並列ファンアウト</span>で同時進行。発想が「AIをどう使うか」から「AIを組織としてどう設計するか」へ移行。</div></div>
           </div>
         </article>
 
         <article class="case reveal">
           <div class="case-aside">
-            <div class="case-tag">CASE — ENGINEERING</div>
-            <h3>推測せず、計測で根治する</h3>
-            <span class="metric"><b>120秒 → 9秒</b></span>
+            <div class="case-tag">CASE — RELIABILITY</div>
+            <h3>安定性の担保可能性</h3>
+            <p class="case-question">AIの暴走を、本当に構造だけで二度と起きなくできるのか？</p>
+            <span class="metric"><b>red → green</b> で恒久化</span>
           </div>
           <div class="case-body">
-            <div class="row"><div class="lab">課題</div><div class="val">内製エディタの予約投稿フローが120秒たっても終わらない。「たぶんモデルのせい」で片付けず原因を切り分け。</div></div>
-            <div class="row"><div class="lab">使い方</div><div class="val">真因は<span class="em">接続中の全MCPツール定義を毎回ロードしていたこと</span>と特定。使うツールだけにスコープ限定（<span class="em">--strict-mcp-config</span>）。モデル選択など他要因は計測で除外。</div></div>
-            <div class="row result"><div class="lab">成果</div><div class="val">該当処理が<span class="em">120秒→9秒</span>、フロー全体28〜44秒で安定。推測でなく計測で根治する規律。</div></div>
+            <div class="row"><div class="lab">課題</div><div class="val">AIは推測で動くことがあり、暴走すると被害が広がる。閉じ忘れた1セッションがAPIを叩き続け、並行処理が利用枠を無自覚に消費するインシデントが発生。</div></div>
+            <div class="row"><div class="lab">使い方</div><div class="val">AI呼び出しの並行処理を<span class="em">一箇所のゲート</span>に集約し、想定外の切断時も必ず解放される設計に。再発を検知する監視の仕組みも常設し、回帰テストで固定した。</div></div>
+            <div class="row result"><div class="lab">成果</div><div class="val">「起きたら直す」でなく<span class="em">「二度と起きない構造」</span>に。暴走を封じ込め、安定性を構造で作れるかを検証中。</div></div>
           </div>
         </article>
 
         <article class="case reveal">
           <div class="case-aside">
-            <div class="case-tag">CASE — RELIABILITY</div>
-            <h3>暴走を、構造で封じ込める</h3>
-            <span class="metric"><b>red → green</b> で恒久化</span>
+            <div class="case-tag">CASE — MEASUREMENT</div>
+            <h3>推測ゼロ化の可能性</h3>
+            <p class="case-question">感覚でなく計測だけで、本当にバグの真因を突き止められるのか？</p>
+            <span class="metric"><b>120秒 → 9秒</b></span>
           </div>
           <div class="case-body">
-            <div class="row"><div class="lab">課題</div><div class="val">閉じ忘れた1セッションがAPIを叩き続け、並行処理が利用枠を無自覚に消費するインシデントが発生。</div></div>
-            <div class="row"><div class="lab">使い方</div><div class="val">エディタ内8箇所のAI呼び出しを<span class="em">共有の同時実行ゲート</span>に集約し、クライアント切断時も必ず解放。再発検知用に<span class="em">監視デーモンをlaunchd常駐で新設</span>。デッドロック検証込みの回帰テストで固定。</div></div>
-            <div class="row result"><div class="lab">成果</div><div class="val">「起きたら直す」でなく<span class="em">「二度と起きない構造」</span>に。障害対応をテストとして資産化。</div></div>
+            <div class="row"><div class="lab">課題</div><div class="val">内製エディタの予約投稿フローが120秒たっても終わらない。「たぶんモデルのせい」で片付けず原因を切り分け。</div></div>
+            <div class="row"><div class="lab">使い方</div><div class="val">真因を<span class="em">推測でなく計測</span>で切り分け、無駄な処理を特定して除外。モデル選択など他の要因も同様に、計測で仮説を検証していった。</div></div>
+            <div class="row result"><div class="lab">成果</div><div class="val">該当処理が<span class="em">120秒→9秒</span>に安定。この規律を横展開し、<span class="em">利用枠監視やダッシュボード</span>などKPI・モニタリング機構を常設する運用に発展させている。</div></div>
           </div>
         </article>
 
         <article class="case reveal">
           <div class="case-aside">
             <div class="case-tag">CASE — STANDARDS</div>
-            <h3>標準を、自分で作る</h3>
-            <span class="metric"><b>入口 + 出口</b> の品質ゲート</span>
+            <h3>自走組織化の可能性</h3>
+            <p class="case-question">役割でなく価値観まで渡せば、本当にAIは自分で動けるのか？</p>
+            <span class="metric"><b>部門ごと</b> に業務標準</span>
           </div>
           <div class="case-body">
-            <div class="row"><div class="lab">課題</div><div class="val">1人で複数の開発・制作を回すと、進め方が属人化して品質が揺れる。</div></div>
-            <div class="row"><div class="lab">使い方</div><div class="val">「AI開発標準マニュアル」を<span class="em">自ら策定</span>（DEV_STANDARDS）。入口＝要件1枚の承認、出口＝再現テスト先付け（red→fix→green）。Flask / Next 両方のテスト基盤テンプレを用意し、<span class="em">git push前フックで自動強制</span>。</div></div>
-            <div class="row result"><div class="lab">成果</div><div class="val">開発・コンテンツ・組織それぞれに標準を整備。仕組みで品質を担保する運用へ。</div></div>
+            <div class="row"><div class="lab">課題</div><div class="val">役割（部長）を作るだけでは動かない。指示待ちのまま、精度の低い自動化しか生まれない。</div></div>
+            <div class="row"><div class="lab">使い方</div><div class="val">各部長に、<span class="em">その分野固有の業務標準と価値観</span>を明文化して渡す。開発なら開発の規律、デザインならデザインの規律というように、分野ごとにプロセスを設計している。</div></div>
+            <div class="row result"><div class="lab">成果</div><div class="val">「役割を作る」から<span class="em">「価値観と標準を渡す」</span>へ。各部長が分野の規律に沿って自走できる状態に近づいている。</div></div>
+          </div>
+        </article>
+
+        <article class="case reveal">
+          <div class="case-aside">
+            <div class="case-tag">CASE — COST</div>
+            <h3>コスト最小化の可能性</h3>
+            <p class="case-question">性能を落とさずに、本当にAIコストを99%近くまで削れるのか？</p>
+            <span class="metric"><b>最大99%</b> 消費カット</span>
+          </div>
+          <div class="case-body">
+            <div class="row"><div class="lab">課題</div><div class="val">高性能なモデルほどトークンを食う。良いものを使うほど、無駄なコストも増えやすい。</div></div>
+            <div class="row"><div class="lab">使い方</div><div class="val">AIの<span class="em">既定設定と稼働範囲</span>を見直し、サブエージェントの起動を<span class="em">承認制</span>に。精度が要る場面だけ人が判断して強い設定に引き上げる設計にした。</div></div>
+            <div class="row result"><div class="lab">成果</div><div class="val">Haiku帯への切り替えで消費枠を<span class="em">最大99%カット</span>。常用のSonnet 4.5でも<span class="em">約90%カット</span>を実現。品質を落とさずコストパフォーマンスを見ながら回せる体制に。</div></div>
+          </div>
+        </article>
+
+        <article class="case reveal">
+          <div class="case-aside">
+            <div class="case-tag">CASE — KNOWLEDGE</div>
+            <h3>暗黙知の資産化可能性</h3>
+            <p class="case-question">言語化していない自分の思考も、本当にAIはフレームワークとして発見できるのか？</p>
+            <span class="metric"><b>全履歴</b> を横断分析</span>
+          </div>
+          <div class="case-body">
+            <div class="row"><div class="lab">課題</div><div class="val">会話の中で使っている自分の思考パターンやメソッドを、本人は「型」と自覚していない。属人化した暗黙知のまま埋もれがち。</div></div>
+            <div class="row"><div class="lab">使い方</div><div class="val">対話履歴を<span class="em">横断的に振り返り</span>、繰り返し使っている考え方や共通項をAIに発見させる仕組みを運用。加えて自分自身も新しい情報を継続的にインプットし、発見の精度を上げていく。</div></div>
+            <div class="row result"><div class="lab">成果</div><div class="val">暗黙知が<span class="em">再利用可能なフレームワーク</span>として自動的に資産化される。ノウハウの蓄積が「発見」というかたちで加速している。</div></div>
           </div>
         </article>
 
@@ -466,12 +482,13 @@
     <div class="wrap">
       <div class="sec-head reveal">
         <span class="kicker">Built</span>
-        <h2>作ったもの。</h2>
-        <p>すべて Mac mini 上で自作・運用。<span style="color:var(--good);font-family:var(--mono);font-size:.85em">LIVE</span> はlaunchdで常駐稼働中のもの。（デモ・詳細は面談時に）</p>
+        <h2>作ったもの。作っているものを一部お見せします。</h2>
+        <p>すべて外出先でも利用可能。Mac mini 上で動作するよう設計しており、24時間365日サーバーのように利用できる。そのため、低コスト・安定・安全運用・高い利便性を兼ねた環境を構築できている。<span style="color:var(--good);font-family:var(--mono);font-size:.85em">LIVE</span> はlaunchdで常駐稼働中のもの。</p>
+        <p class="bg-note">※デモ・詳細をご希望の場合は面談時にお声掛けください。</p>
       </div>
       <div class="prods">
-        <div class="prod reveal"><div class="ic">NOTE</div><div><h4>note-editor <span class="live">LIVE</span></h4><p>チャットUIの記事制作エディタ。執筆ルール＋Web調査＋検品ゲートを毎回通す。Flask + React 19 / Vite。E2E約44テスト。</p></div></div>
-        <div class="prod reveal"><div class="ic">TRSC</div><div><h4>poc-transcribe <span class="live">LIVE</span></h4><p>動画URL→タイムスタンプ付き文字起こし。ローカルGPU（mlx-whisper）でAPIコストゼロ。毎朝の自動クリッピングも。</p></div></div>
+        <div class="prod reveal"><div class="ic">NOTE</div><div><h4>note-editor <span class="live">LIVE</span></h4><p>チャットUIの記事制作エディタ。元ネタ収集→執筆ルールに沿った下書き→検品ゲートまで毎回通す。Flask + React 19 / Vite。E2E約44テスト。</p></div></div>
+        <div class="prod reveal"><div class="ic">TRSC</div><div><h4>poc-transcribe <span class="live">LIVE</span></h4><p>動画URL→タイムスタンプ付き文字起こし。ローカルGPU（mlx-whisper）でAPIコストゼロ。毎朝の自動／外出先スマホからのクリッピングに対応し、note-editorの元ネタになる。</p></div></div>
         <div class="prod reveal"><div class="ic">BORD</div><div><h4>devboard <span class="live">LIVE</span></h4><p>複数プロジェクトの状態を1画面集約。3秒ポーリング＋停滞検知＋自前Web Push通知（PWA）。16案件を集約運用。</p></div></div>
         <div class="prod reveal"><div class="ic">SNS</div><div><h4>sns-publisher</h4><p>note / X / LinkedIn への予約投稿を自動化。自作のMCPサーバとしても操作でき、二重投稿もアトミックに排除。</p></div></div>
         <div class="prod reveal"><div class="ic">SIM</div><div><h4>business-simulator ほか</h4><p>集客→認知→収支のシミュレーター、SFA/CRM、キャッシュフローを Streamlit で内製。</p></div></div>
@@ -486,7 +503,7 @@
       <div class="sec-head reveal">
         <span class="kicker">Trajectory</span>
         <h2>今やっていること、これからやること。</h2>
-        <p>AIの進化は速い。だから「何ができたか」だけでなく、今どこにいて、次にどこへ向かうかを示します。</p>
+        <p>AIの進化は速い。だから「何ができたか」だけでなく、今どこにいて、次にどこへ向かうかを示します。AIは多くのことができる一方、プロセスやステータスがブラックボックスになりがちです。AIがやっていることが狙いどおりの成果物・状態になる「コントローラブル」な状態を作ることが重要だと考えています。</p>
       </div>
       <div class="nn">
         <div class="panel now reveal">
@@ -498,11 +515,11 @@
           </ul>
         </div>
         <div class="panel next reveal">
-          <span class="kicker">Next — これから ✎自分の言葉に調整可</span>
+          <span class="kicker">Next — これから</span>
           <ul class="tl">
-            <li><span class="mk"></span><div><strong>AIエージェント運用を、組織に実装する</strong><br><span>1人で確立した15体制の型を、チーム・事業スケールへ広げる。</span></div></li>
-            <li><span class="mk"></span><div><strong>「計測して根治する」開発文化を移植する</strong><br><span>属人でなく、標準と再現テストで品質を担保する開発を根付かせる。</span></div></li>
-            <li><span class="mk"></span><div><strong>マーケ起点で、事業の生産性を設計する</strong><br><span>出自のマーケ視点で、AI活用を売上・業務に効く形へ落とし込む。</span></div></li>
+            <li><span class="mk"></span><div><strong>低コストで、複数事業・複数開発を並行運用する</strong><br><span>15エージェントを同時進行するとリミット制限にすぐ掛かってしまう。この課題を解決する運用メソッドが必要。</span></div></li>
+            <li><span class="mk"></span><div><strong>業務標準を、各部長エージェントに移管する</strong><br><span>各部長の役割にその業務の基準・標準を移管し、高い業務品質を維持する（業務標準の導入）。</span></div></li>
+            <li><span class="mk"></span><div><strong>主要6分野に、実装領域を拡大</strong><br><span>現在進めている運用の計器化・暴走防止と、これから進める低コストの複数並行運用・業務標準導入によって、主要6分野すべてに対応できるように実装する。</span></div></li>
           </ul>
         </div>
       </div>
@@ -519,24 +536,31 @@
       </div>
       <div class="bg-list reveal">
         <div class="bg-item">
-          <div class="yr">6年間</div>
+          <div class="yr">10年間</div>
           <div>
-            <h3>BtoB SaaS ｜ インサイドセールス → マーケティング</h3>
-            <p>商談の最前線に立つ<strong>インサイドセールス</strong>から<strong>マーケティング</strong>へ転向し、6年。顧客の生の課題感を起点に施策を設計し、<strong>リード獲得を前年比180%</strong>、<strong>商談化率を1.5倍</strong>に改善。ウェビナーは<strong>最高500名</strong>を動員した。「顧客を知る現場」を通ってきたことが、いまのAI活用でも"誰の何を解くか"の起点になっている。</p>
+            <h3>マーケティングリサーチ ｜ 営業 → マネージャー</h3>
+            <p>マーケティングリサーチ業界で、新規開拓からマネージャーまで経験。仮説とデータで数字を作る、今につながる基本の型をここで築いた。</p>
           </div>
         </div>
         <div class="bg-item">
-          <div class="yr">〔20XX〕— 転機</div>
+          <div class="yr">15年間</div>
           <div>
-            <h3>AIの進化を受け、独学で開発へ</h3>
-            <p>生成AIの急速な進化に危機感と可能性を感じ、Claude Code を独学。まず自分の業務を自動化・内製することから始めた。〔※あなた個人のきっかけを1〜2文で〕</p>
+            <h3>デジタル広告運用 ｜ 運用型広告のスペシャリスト</h3>
+            <p>複数社にわたり運用型広告の専門職として従事。金融領域の運用チームをゼロから立ち上げ、<strong>沖縄にニアショア拠点を主担当として立ち上げ</strong>、提携先企業の担当者を2名から15名まで育成しつつレポート作成コストを初年度で48%低減。担当領域では<strong>CV数を最大13倍・獲得単価を最大69%低減</strong>させるなど、数字に責任を持つ運用を積み重ねた。この中で、数字にガッツリ向き合って数字と戦う、とても厳しくも良い経験となった。毎月5〜15件の案件を並行して担当し、<strong>見込みどおりに何度も毎月目標達成させる、数字をコントロールする運用技術</strong>を磨くことができる良い機会となった。</p>
+          </div>
+        </div>
+        <div class="bg-item">
+          <div class="yr">転機 — 2年間</div>
+          <div>
+            <h3>新規事業カンパニーの立ち上げ ｜ 副社長 兼 戦略ディレクター</h3>
+            <p>大手上場企業で、海外展開支援を軸にした新規事業カンパニーの立ち上げに参画。営業・提案書作成・クロージング、そして自らプロジェクトに入ることを基本に据えて推進した。これに加えて、広告予算もPR体制もない状況で、集客ツールとして個人ブログ（note）の平日毎日投稿を開始。<strong>複数の生成AI（ChatGPT、Perplexity等）</strong>を執筆・市場調査・データ集計に使い分け、限られたリソースで発信を回す体制を構築し、現在3年目・約650本の投稿を継続している。この経験が、後のAIエージェント運用へとつながる転機になった。</p>
           </div>
         </div>
         <div class="bg-item">
           <div class="yr">現在</div>
           <div>
             <h3>1人でAIエージェント組織を設計・運用</h3>
-            <p>調査・制作・開発・運用を横断し、15体のAIエージェント体制でシステムを内製・運用（本ポートフォリオの内容）。</p>
+            <p>現職のデジタルマーケティング実務（需給予測モデルのKPI設計など）を行っている。2025年末にClaudeで複数エージェントを使いタスクを進行できることを知り、本格的にClaude Codeに取り組み始めた。以降、業務とは別に個人として、調査・制作・開発・運用を横断する15体のAIエージェント体制を内製・運用している（本ポートフォリオの内容）。</p>
           </div>
         </div>
       </div>
@@ -549,8 +573,8 @@
     <div class="wrap">
       <div class="sec-head reveal">
         <span class="kicker">Stack</span>
-        <h2>使いこなしている道具。</h2>
-        <p>名目でなく、実際に手を動かした証拠があるものだけ。</p>
+        <h2>本件で使用している道具。</h2>
+        <p>本件のAI/ClaudeCodeで使用しているツール群です。</p>
       </div>
       <div class="stack-groups reveal">
         <div>
@@ -576,13 +600,14 @@
       <div class="reveal">
         <span class="kicker">Contact</span>
         <h2>AIで、チームの生産性を変えます。</h2>
-        <p class="contact-note">実名・詳細な経歴・職務経歴書は、ご連絡いただいた方に<strong>個別にお送りします</strong>。まずはお気軽にどうぞ。</p>
+        <p class="contact-note">職務経歴書、その他お問い合わせはフォームから、お気軽にお問い合わせください。</p>
       </div>
       <div class="links reveal">
-        <!-- お問い合わせフォーム URL は準備中 -->
+        <a class="contact-cta" href="https://forms.gle/7X3wxf5xa5SnDGor6" target="_blank" rel="noopener">お問い合わせフォーム</a>
+        <span class="contact-sub">Googleフォーム・ログイン不要</span>
       </div>
     </div>
-    <div class="fineprint">織原松治 — Portfolio · designed &amp; built with Claude Code · 〔更新日〕</div>
+    <div class="fineprint">織原松治 — Portfolio · designed &amp; built with Claude Code · 更新日 2026-07-09</div>
   </div>
 </footer>
 
